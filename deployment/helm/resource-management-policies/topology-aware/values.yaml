@@ -10,7 +10,7 @@ image:
 
 config:
   ReservedResources:
-    cpu: 750m
+    cpu 750m
 
 hostPort: 8891
 
