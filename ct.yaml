@@ -1,0 +1,13 @@
+validate-maintainers: false
+validate-chart-schema: true
+validate-yaml: true
+all: true
+chart-dirs:
+  - deployment/helm/resource-management-policies/
+namespace: "kube-system"
+release-label: "release"
+remote: origin
+target-branch: main
+github-instance: https://github.com
+lint-conf: ct.yaml
+print-config: true
