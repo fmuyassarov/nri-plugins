@@ -16,4 +16,4 @@ hostPort: 8891
 
 resources:
   cpu: 500m
-  memory: 512Mi
+  memory512Mi
