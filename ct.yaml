@@ -1,0 +1,9 @@
+validate-maintainers: false
+validate-chart-schema: true
+validate-yaml: true
+all: true
+helm-repo-extra-args:
+  - incubator=--username test
+chart-dirs:
+  - /nri-plugins/deployment/helm/resource-management-policies
+helm-extra-args: --timeout 300
