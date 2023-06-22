@@ -1,0 +1,7 @@
+validate-maintainers: false
+validate-chart-schema: true
+validate-yaml: true
+all: true
+chart-dirs:
+  - deployment/helm/resource-management-policies/
+helm-extra-args: --timeout 300
