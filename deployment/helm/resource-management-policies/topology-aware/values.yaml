@@ -8,11 +8,8 @@ image:
   tag: unstable
   pullPolicy: Always
 
-config:
   ReservedResources:
     cpu: 750m
-
-hostPort: 8891
 
 resources:
   cpu: 500m
