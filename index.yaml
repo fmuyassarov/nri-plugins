@@ -1,0 +1,34 @@
+apiVersion: v1
+entries:
+  nri-resource-policy-balloons:
+  - apiVersion: v2
+    appVersion: main
+    created: "2023-09-11T07:24:10.72810648Z"
+    description: 'The balloons NRI resource policy plugin implements workload placement
+      into “balloons” that are disjoint CPU pools. '
+    digest: 1a5c5b0071b0fa4de7eae08647fe7859e68b416069eebf59b69e15853c8f5a17
+    home: https://github.com/containers/nri-plugins
+    name: nri-resource-policy-balloons
+    sources:
+    - https://github.com/containers/nri-plugins
+    type: application
+    urls:
+    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.1/nri-resource-policy-balloons-v0.0.0.tgz
+    version: v0.0.0
+  nri-resource-policy-topology-aware:
+  - apiVersion: v2
+    appVersion: main
+    created: "2023-09-11T07:24:10.728518906Z"
+    description: 'Topology-aware NRI resource policy plugin is a NRI plugin that will
+      apply hardware-aware resource allocation policies to the containers running
+      in the system. '
+    digest: bfa84ed2665e678a1f73d1ef7969201a5fa5d7dec570e924f5cffffedd6d987e
+    home: https://github.com/containers/nri-plugins
+    name: nri-resource-policy-topology-aware
+    sources:
+    - https://github.com/containers/nri-plugins
+    type: application
+    urls:
+    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.1/nri-resource-policy-topology-aware-v0.0.0.tgz
+    version: v0.0.0
+generated: "2023-09-11T07:24:10.72079352Z"
