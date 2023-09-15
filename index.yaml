@@ -3,32 +3,32 @@ entries:
   nri-resource-policy-balloons:
   - apiVersion: v2
     appVersion: main
-    created: "2023-09-15T08:25:16.930436373Z"
+    created: "2023-09-15T08:28:34.667813951Z"
     description: 'The balloons NRI resource policy plugin implements workload placement
       into “balloons” that are disjoint CPU pools. '
-    digest: e23f1d8318147d1e3e495731b960f35487aab62f6b855a6ff59ed7984722db95
+    digest: 46b74de8449a1d3a79a44745f7c894da40d158d54af8ea36a8881a0416e4fd8e
     home: https://github.com/containers/nri-plugins
     name: nri-resource-policy-balloons
     sources:
     - https://github.com/containers/nri-plugins
     type: application
     urls:
-    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.3/nri-resource-policy-balloons-helm-chart-v0.0.0.tgz
+    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.4/nri-resource-policy-balloons-helm-chart-v0.0.0.tgz
     version: v0.0.0
   nri-resource-policy-topology-aware:
   - apiVersion: v2
     appVersion: main
-    created: "2023-09-15T08:25:17.147982921Z"
+    created: "2023-09-15T08:28:35.192060937Z"
     description: 'Topology-aware NRI resource policy plugin is a NRI plugin that will
       apply hardware-aware resource allocation policies to the containers running
       in the system. '
-    digest: c2a3962d158c98145e1ebfc86dd3ceddc03eb4f2a89770bbdb5e1383b2b6f135
+    digest: 2b0332e739b2583f8ea69f35b02dac92f96b29137c532aa0763271a7089ad175
     home: https://github.com/containers/nri-plugins
     name: nri-resource-policy-topology-aware
     sources:
     - https://github.com/containers/nri-plugins
     type: application
     urls:
-    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.3/nri-resource-policy-topology-aware-helm-chart-v0.0.0.tgz
+    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.4/nri-resource-policy-topology-aware-helm-chart-v0.0.0.tgz
     version: v0.0.0
-generated: "2023-09-15T08:25:17.147232126Z"
+generated: "2023-09-15T08:28:35.19099714Z"
