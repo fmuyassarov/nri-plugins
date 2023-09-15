@@ -3,32 +3,32 @@ entries:
   nri-resource-policy-balloons:
   - apiVersion: v2
     appVersion: main
-    created: "2023-09-15T08:18:47.878469424Z"
+    created: "2023-09-15T08:25:16.930436373Z"
     description: 'The balloons NRI resource policy plugin implements workload placement
       into “balloons” that are disjoint CPU pools. '
-    digest: 1a32845aecefdafa0d86c540cbf4c1cc9c4afee28bdb61f478f96788fe988e8c
+    digest: e23f1d8318147d1e3e495731b960f35487aab62f6b855a6ff59ed7984722db95
     home: https://github.com/containers/nri-plugins
     name: nri-resource-policy-balloons
     sources:
     - https://github.com/containers/nri-plugins
     type: application
     urls:
-    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.2/nri-resource-policy-balloons-helm-chart-v0.0.0.tgz
+    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.3/nri-resource-policy-balloons-helm-chart-v0.0.0.tgz
     version: v0.0.0
   nri-resource-policy-topology-aware:
   - apiVersion: v2
     appVersion: main
-    created: "2023-09-15T08:18:48.106581617Z"
+    created: "2023-09-15T08:25:17.147982921Z"
     description: 'Topology-aware NRI resource policy plugin is a NRI plugin that will
       apply hardware-aware resource allocation policies to the containers running
       in the system. '
-    digest: 258c174a57b6500a2b37a5303563d8108bcc6b6418cee6757b2b27f2990b9271
+    digest: c2a3962d158c98145e1ebfc86dd3ceddc03eb4f2a89770bbdb5e1383b2b6f135
     home: https://github.com/containers/nri-plugins
     name: nri-resource-policy-topology-aware
     sources:
     - https://github.com/containers/nri-plugins
     type: application
     urls:
-    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.2/nri-resource-policy-topology-aware-helm-chart-v0.0.0.tgz
+    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.3/nri-resource-policy-topology-aware-helm-chart-v0.0.0.tgz
     version: v0.0.0
-generated: "2023-09-15T08:18:48.105951801Z"
+generated: "2023-09-15T08:25:17.147232126Z"
