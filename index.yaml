@@ -3,32 +3,32 @@ entries:
   nri-resource-policy-balloons:
   - apiVersion: v2
     appVersion: main
-    created: "2023-09-15T08:36:11.881646396Z"
+    created: "2023-09-15T08:41:36.699548242Z"
     description: 'The balloons NRI resource policy plugin implements workload placement
       into “balloons” that are disjoint CPU pools. '
-    digest: ecb800221f46ddd2ae187eee800c5940f4fc5e357eef216a7632476f85f81363
+    digest: f455e5e5624162640ff1223cd535ff4304160b203b61e06eeaee509bcf8e207a
     home: https://github.com/containers/nri-plugins
     name: nri-resource-policy-balloons
     sources:
     - https://github.com/containers/nri-plugins
     type: application
     urls:
-    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.5/nri-resource-policy-balloons-helm-chart-v0.0.0.tgz
+    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.6/nri-resource-policy-balloons-helm-chart-v0.0.0.tgz
     version: v0.0.0
   nri-resource-policy-topology-aware:
   - apiVersion: v2
     appVersion: main
-    created: "2023-09-15T08:36:12.095723398Z"
+    created: "2023-09-15T08:41:36.921139561Z"
     description: 'Topology-aware NRI resource policy plugin is a NRI plugin that will
       apply hardware-aware resource allocation policies to the containers running
       in the system. '
-    digest: 6913658e4ff9961abaf11fe5556125ce0841a95446cf78c6843e8de304f18d97
+    digest: 4e0062e06ebaa70ebb6d2fd0f971f5e6f6ebb695d857cea03ff32b9fcbea7612
     home: https://github.com/containers/nri-plugins
     name: nri-resource-policy-topology-aware
     sources:
     - https://github.com/containers/nri-plugins
     type: application
     urls:
-    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.5/nri-resource-policy-topology-aware-helm-chart-v0.0.0.tgz
+    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.6/nri-resource-policy-topology-aware-helm-chart-v0.0.0.tgz
     version: v0.0.0
-generated: "2023-09-15T08:36:12.095136995Z"
+generated: "2023-09-15T08:41:36.920547751Z"
