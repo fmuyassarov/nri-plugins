@@ -3,32 +3,32 @@ entries:
   nri-resource-policy-balloons:
   - apiVersion: v2
     appVersion: main
-    created: "2023-09-15T08:28:34.667813951Z"
+    created: "2023-09-15T08:36:11.881646396Z"
     description: 'The balloons NRI resource policy plugin implements workload placement
       into “balloons” that are disjoint CPU pools. '
-    digest: 46b74de8449a1d3a79a44745f7c894da40d158d54af8ea36a8881a0416e4fd8e
+    digest: ecb800221f46ddd2ae187eee800c5940f4fc5e357eef216a7632476f85f81363
     home: https://github.com/containers/nri-plugins
     name: nri-resource-policy-balloons
     sources:
     - https://github.com/containers/nri-plugins
     type: application
     urls:
-    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.4/nri-resource-policy-balloons-helm-chart-v0.0.0.tgz
+    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.5/nri-resource-policy-balloons-helm-chart-v0.0.0.tgz
     version: v0.0.0
   nri-resource-policy-topology-aware:
   - apiVersion: v2
     appVersion: main
-    created: "2023-09-15T08:28:35.192060937Z"
+    created: "2023-09-15T08:36:12.095723398Z"
     description: 'Topology-aware NRI resource policy plugin is a NRI plugin that will
       apply hardware-aware resource allocation policies to the containers running
       in the system. '
-    digest: 2b0332e739b2583f8ea69f35b02dac92f96b29137c532aa0763271a7089ad175
+    digest: 6913658e4ff9961abaf11fe5556125ce0841a95446cf78c6843e8de304f18d97
     home: https://github.com/containers/nri-plugins
     name: nri-resource-policy-topology-aware
     sources:
     - https://github.com/containers/nri-plugins
     type: application
     urls:
-    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.4/nri-resource-policy-topology-aware-helm-chart-v0.0.0.tgz
+    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.5/nri-resource-policy-topology-aware-helm-chart-v0.0.0.tgz
     version: v0.0.0
-generated: "2023-09-15T08:28:35.19099714Z"
+generated: "2023-09-15T08:36:12.095136995Z"
