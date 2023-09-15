@@ -3,32 +3,32 @@ entries:
   nri-resource-policy-balloons:
   - apiVersion: v2
     appVersion: main
-    created: "2023-09-15T08:41:36.699548242Z"
+    created: "2023-09-15T08:43:59.941785788Z"
     description: 'The balloons NRI resource policy plugin implements workload placement
       into “balloons” that are disjoint CPU pools. '
-    digest: f455e5e5624162640ff1223cd535ff4304160b203b61e06eeaee509bcf8e207a
+    digest: 36fc73bc345b1256f23eaa3e4e80e90148136df7af545f988ab036eb58e175e9
     home: https://github.com/containers/nri-plugins
     name: nri-resource-policy-balloons
     sources:
     - https://github.com/containers/nri-plugins
     type: application
     urls:
-    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.6/nri-resource-policy-balloons-helm-chart-v0.0.0.tgz
+    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.7/nri-resource-policy-balloons-helm-chart-v0.0.0.tgz
     version: v0.0.0
   nri-resource-policy-topology-aware:
   - apiVersion: v2
     appVersion: main
-    created: "2023-09-15T08:41:36.921139561Z"
+    created: "2023-09-15T08:44:00.390593267Z"
     description: 'Topology-aware NRI resource policy plugin is a NRI plugin that will
       apply hardware-aware resource allocation policies to the containers running
       in the system. '
-    digest: 4e0062e06ebaa70ebb6d2fd0f971f5e6f6ebb695d857cea03ff32b9fcbea7612
+    digest: 335b7debcb9a136f248178aedd4b51061af9a9fe35ac883d9cf65f7e93ef9d84
     home: https://github.com/containers/nri-plugins
     name: nri-resource-policy-topology-aware
     sources:
     - https://github.com/containers/nri-plugins
     type: application
     urls:
-    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.6/nri-resource-policy-topology-aware-helm-chart-v0.0.0.tgz
+    - https://github.com/fmuyassarov/nri-plugins/releases/download/v0.0.7/nri-resource-policy-topology-aware-helm-chart-v0.0.0.tgz
     version: v0.0.0
-generated: "2023-09-15T08:41:36.920547751Z"
+generated: "2023-09-15T08:44:00.387846256Z"
