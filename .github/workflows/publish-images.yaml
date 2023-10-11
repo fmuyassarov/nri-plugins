@@ -27,10 +27,10 @@ jobs:
       - name: Build images
         run: make images
 
-      - name: Log in to registry
-        run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | \
-              docker login ${{ env.REGISTRY }} -u ${{ env.REGISTRY_USER }} --password-stdin
+      # - name: Log in to registry
+      #   run: |
+      #     echo "${{ secrets.GITHUB_TOKEN }}" | \
+      #         docker login ${{ env.REGISTRY }} -u ${{ env.REGISTRY_USER }} --password-stdin
 
       - name: Push images
         run: |
@@ -61,6 +61,6 @@ jobs:
                       ;;
               esac
               echo "  - tag: $tag"
-              docker tag $sha $IMAGE_LOCATION/nri-$img:$tag
-              docker push $IMAGE_LOCATION/nri-$img:$tag
+              docker tag $sha $IMAGE_LOCATION/nri-$img:v$tag
+              docker push $IMAGE_LOCATION/nri-$img:v$tag
           done
