@@ -1,0 +1,20 @@
+apiVersion: plugins.nri-plugins.io/v1alpha1
+kind: MemoryQosPluginConfig
+metadata:
+  name: memoryqospluginconfig-sample
+spec:
+  # Default values copied from <project_dir>/helm-charts/nri-memory-qos/values.yaml
+  image:
+    name: ghcr.io/containers/nri-plugins/nri-memory-qos
+    pullPolicy: IfNotPresent
+  initContainerImage:
+    name: ghcr.io/containers/nri-plugins/nri-config-manager
+    pullPolicy: IfNotPresent
+  nri:
+    patchRuntimeConfig: false
+  resources:
+    cpu: 10m
+    memory: 100Mi
+  tolerations: []
+  
+  

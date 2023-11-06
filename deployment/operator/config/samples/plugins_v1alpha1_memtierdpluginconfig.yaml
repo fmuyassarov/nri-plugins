@@ -1,0 +1,21 @@
+apiVersion: plugins.nri-plugins.io/v1alpha1
+kind: MemtierdPluginConfig
+metadata:
+  name: memtierdpluginconfig-sample
+spec:
+  # Default values copied from <project_dir>/helm-charts/nri-memtierd/values.yaml
+  image:
+    name: ghcr.io/containers/nri-plugins/nri-memtierd
+    pullPolicy: IfNotPresent
+  initContainerImage:
+    name: ghcr.io/containers/nri-plugins/nri-config-manager
+    pullPolicy: IfNotPresent
+  nri:
+    patchRuntimeConfig: false
+  outputDir: ""
+  resources:
+    cpu: 250m
+    memory: 100Mi
+  tolerations: []
+  
+  

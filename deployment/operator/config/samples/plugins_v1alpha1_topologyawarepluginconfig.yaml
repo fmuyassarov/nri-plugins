@@ -1,0 +1,25 @@
+apiVersion: plugins.nri-plugins.io/v1alpha1
+kind: TopologyAwarePluginConfig
+metadata:
+  name: topologyawarepluginconfig-sample
+spec:
+  # Default values copied from <project_dir>/helm-charts/nri-resource-policy-topology-aware/values.yaml
+  config:
+    policy:
+      ReservedResources:
+        cpu: 750m
+  hostPort: 8891
+  image:
+    name: ghcr.io/containers/nri-plugins/nri-resource-policy-topology-aware
+    pullPolicy: IfNotPresent
+  initContainerImage:
+    name: ghcr.io/containers/nri-plugins/nri-config-manager
+    pullPolicy: IfNotPresent
+  nri:
+    patchRuntimeConfig: false
+  resources:
+    cpu: 500m
+    memory: 512Mi
+  tolerations: []
+  
+  

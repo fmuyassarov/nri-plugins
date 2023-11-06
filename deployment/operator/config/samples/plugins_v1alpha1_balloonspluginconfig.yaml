@@ -1,0 +1,25 @@
+apiVersion: plugins.nri-plugins.io/v1alpha1
+kind: BalloonsPluginConfig
+metadata:
+  name: balloonspluginconfig-sample
+spec:
+  # Default values copied from <project_dir>/helm-charts/nri-resource-policy-balloons/values.yaml
+  config:
+    policy:
+      ReservedResources:
+        cpu: 750m
+  hostPort: 8891
+  image:
+    name: ghcr.io/containers/nri-plugins/nri-resource-policy-balloons
+    pullPolicy: IfNotPresent
+  initContainerImage:
+    name: ghcr.io/containers/nri-plugins/nri-config-manager
+    pullPolicy: IfNotPresent
+  nri:
+    patchRuntimeConfig: false
+  resources:
+    cpu: 500m
+    memory: 512Mi
+  tolerations: []
+  
+  

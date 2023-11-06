@@ -1,0 +1,7 @@
+## Append samples of your project ##
+resources:
+- plugins_v1alpha1_topologyawarepluginconfig.yaml
+- plugins_v1alpha1_balloonspluginconfig.yaml
+- plugins_v1alpha1_memoryqospluginconfig.yaml
+- plugins_v1alpha1_memtierdpluginconfig.yaml
+#+kubebuilder:scaffold:manifestskustomizesamples

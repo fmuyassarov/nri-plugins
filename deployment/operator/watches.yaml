@@ -1,0 +1,18 @@
+# Use the 'create api' subcommand to add watches to this file.
+- group: plugins.nri-plugins.io
+  version: v1alpha1
+  kind: TopologyAwarePluginConfig
+  chart: helm/topology-aware
+- group: plugins.nri-plugins.io
+  version: v1alpha1
+  kind: BalloonsPluginConfig
+  chart: helm/balloons
+- group: plugins.nri-plugins.io
+  version: v1alpha1
+  kind: MemoryQosPluginConfig
+  chart: helm/memory-qos
+- group: plugins.nri-plugins.io
+  version: v1alpha1
+  kind: MemtierdPluginConfig
+  chart: helm/memtierd
+#+kubebuilder:scaffold:watch

@@ -1,0 +1,46 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: '[]'
+    capabilities: Basic Install
+  name: nri-plugins-unified-operator.v0.0.0
+  namespace: placeholder
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions: {}
+  description: nri-plugins-operator
+  displayName: nri-plugins-operator
+  icon:
+  - base64data: ""
+    mediatype: ""
+  install:
+    spec:
+      deployments: null
+    strategy: ""
+  installModes:
+  - supported: false
+    type: OwnNamespace
+  - supported: false
+    type: SingleNamespace
+  - supported: false
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  keywords:
+  - nri
+  - resource-management
+  - cri-o
+  - containerd
+  - kubernetes
+  links:
+  - name: Nri Plugins Unified Operator
+    url: https://nri-plugins-unified-operator.domain
+  maintainers:
+  - email: feruzjon.muyassarov@intel.com
+    name: fmuyassarov
+  maturity: alpha
+  provider:
+    name: containers/nri-plugins github project owners
+    url: https://github.com/containers/nri-plugins
+  version: 0.0.0
