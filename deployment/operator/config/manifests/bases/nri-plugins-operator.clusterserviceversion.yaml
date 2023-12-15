@@ -22,15 +22,31 @@ spec:
       name: nriplugindeployments.config.nri
       version: v1alpha1
     - description: Describes node resources and their topology
-      displayName: Node Resource Topology
+      displayName: Node Resource Topology (v1alpha1)
       kind: NodeResourceTopology
       name: noderesourcetopologies.topology.node.k8s.io
       version: v1alpha1
     - description: Describes node resources and their topology
-      displayName: Node Resource Topology
+      displayName: Node Resource Topology (v1alpha2)
       kind: NodeResourceTopology
       name: noderesourcetopologies.topology.node.k8s.io
       version: v1alpha2
+    - description: BalloonsPolicy represents the configuration for the balloons policy
+      displayName: Balloons Policy
+      kind: BalloonsPolicy
+      name: balloonspolicies.config.nri
+      version: v1alpha1
+    - description: TemplatePolicy represents the configuration for the template policy.
+      displayName: Template Policy
+      kind: TemplatePolicy
+      name: templatepolicies.config.nri
+      version: v1alpha1
+    - description: TopologyAwarePolicy represents the configuration for the topology-aware
+        policy.
+      displayName: Topology Aware Policy
+      kind: TopologyAwarePolicy
+      name: topologyawarepolicies.config.nri
+      version: v1alpha1
   description: |-
     The **nri-plugins-operator** deploys community maintained [nri-plugins](https://github.com/containers/nri-plugins) into a Kubernetes cluster.
 

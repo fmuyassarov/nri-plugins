@@ -134,7 +134,7 @@ endif
 
 .PHONY: ansible-operator
 ANSIBLE_OPERATOR = $(shell pwd)/bin/ansible-operator
-ansible-operator: ## Download ansible-operator locally if necessary, preferring the $(pwd)/bin path over global if both exist.
+ansible-operator: ##Download ansible-operator locally if necessary, preferring the $(pwd)/bin path over global if both exist.
 ifeq (,$(wildcard $(ANSIBLE_OPERATOR)))
 ifeq (,$(shell which ansible-operator 2>/dev/null))
 	@{ \
@@ -164,8 +164,17 @@ OPERATOR_SDK = $(shell which operator-sdk)
 endif
 endif
 
-bundle-crds: ## Copy CRDs for bundle packaging.
-	cp ../../config/crd/bases/topology.node.k8s.io_noderesourcetopologies.yaml config/crd/bases/topology.node.k8s.io_noderesourcetopologies.yaml
+CRD_SOURCE_DIR := ../../config/crd/bases
+CRD_DEST_DIR := config/crd/bases
+SAMPLE_SOURCE_DIR := ../../sample-configs
+SAMPLE_DEST_DIR := config/samples
+
+bundle-crds: ## Copy CRDs and CRs from root directory to operator directory for bundle packaging.
+	cp $(CRD_SOURCE_DIR)/* $(CRD_DEST_DIR)
+	cp $(SAMPLE_SOURCE_DIR)/balloons-config.yaml $(SAMPLE_DEST_DIR)
+	cp $(SAMPLE_SOURCE_DIR)/template-config.yaml $(SAMPLE_DEST_DIR)
+	cp $(SAMPLE_SOURCE_DIR)/topologyaware-config.yaml $(SAMPLE_DEST_DIR)
+	cp $(SAMPLE_SOURCE_DIR)/noderesourcetopology.yaml $(SAMPLE_DEST_DIR)
 
 .PHONY: bundle
 bundle: bundle-crds kustomize operator-sdk ## Generate bundle manifests and metadata, then validate generated files.
@@ -173,7 +182,11 @@ bundle: bundle-crds kustomize operator-sdk ## Generate bundle manifests and meta
 	cd config/manager && $(KUSTOMIZE) edit set image controller=$(IMG)
 	$(KUSTOMIZE) build config/manifests | $(OPERATOR_SDK) generate bundle $(BUNDLE_GEN_FLAGS)
 	$(OPERATOR_SDK) bundle validate ./bundle
-	rm -f config/crd/bases/topology.node.k8s.io_noderesourcetopologies.yaml
+	rm -f $(CRD_DEST_DIR)/*
+	rm -f $(SAMPLE_DEST_DIR)/balloons-config.yaml
+	rm -f $(SAMPLE_DEST_DIR)/template-config.yaml
+	rm -f $(SAMPLE_DEST_DIR)/topologyaware-config.yaml
+	rm -f $(SAMPLE_DEST_DIR)/noderesourcetopology.yaml
 
 .PHONY: bundle-build
 bundle-build: ## Build the bundle image.
