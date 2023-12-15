@@ -164,12 +164,16 @@ OPERATOR_SDK = $(shell which operator-sdk)
 endif
 endif
 
+bundle-crds: ## Copy CRDs for bundle packaging.
+	cp ../../config/crd/bases/topology.node.k8s.io_noderesourcetopologies.yaml config/crd/bases/topology.node.k8s.io_noderesourcetopologies.yaml
+
 .PHONY: bundle
-bundle: kustomize operator-sdk ## Generate bundle manifests and metadata, then validate generated files.
+bundle: bundle-crds kustomize operator-sdk ## Generate bundle manifests and metadata, then validate generated files.
 	$(OPERATOR_SDK) generate kustomize manifests -q
 	cd config/manager && $(KUSTOMIZE) edit set image controller=$(IMG)
 	$(KUSTOMIZE) build config/manifests | $(OPERATOR_SDK) generate bundle $(BUNDLE_GEN_FLAGS)
 	$(OPERATOR_SDK) bundle validate ./bundle
+	rm -f config/crd/bases/topology.node.k8s.io_noderesourcetopologies.yaml
 
 .PHONY: bundle-build
 bundle-build: ## Build the bundle image.
