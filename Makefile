@@ -77,6 +77,9 @@ PLUGINS ?= \
 BINARIES ?= \
 	config-manager
 
+OPERATOR ?= \
+	nri-plugins-operator
+
 ifneq ($(V),1)
   Q := @
 endif
@@ -207,7 +210,8 @@ $(BIN_PATH)/%: .static.%.$(STATIC)
 #
 
 images: $(foreach p,$(PLUGINS),image.$(p)) \
-	$(foreach p,$(BINARIES),image.$(p))
+	$(foreach p,$(BINARIES),image.$(p)) \
+	$(foreach p,$(OPERATOR),image.$(p))
 
 image.nri-resource-policy-% \
 image.nri-% \
