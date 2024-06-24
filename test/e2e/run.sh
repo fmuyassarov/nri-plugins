@@ -874,6 +874,37 @@ $py_assertion
     return 0
 }
 
+fedora-set-kernel-cmdline() {
+    local e2e_defaults="$*"
+    vm-command "mkdir -p /etc/default; touch /etc/default/grub; sed -i '/e2e:fedora-set-kernel-cmdline/d' /etc/default/grub"
+    vm-command "sed -i '/${e2e_defaults}/d' /etc/default/grub"
+    vm-command "echo 'GRUB_CMDLINE_LINUX_DEFAULT=\"\${GRUB_CMDLINE_LINUX_DEFAULT} ${e2e_defaults}\"' >> /etc/default/grub" || {
+        command-error "writing new command line parameters failed"
+    }
+    vm-command "grub2-mkconfig -o /boot/grub2/grub.cfg" || {
+        command-error "updating grub failed"
+    }
+}
+
+ubuntu-set-kernel-cmdline() {
+    local e2e_defaults="$1"
+    vm-command "echo 'GRUB_CMDLINE_LINUX_DEFAULT=\"\${GRUB_CMDLINE_LINUX_DEFAULT} ${e2e_defaults}\"' > /etc/default/grub.d/60-e2e-defaults.cfg" || {
+        command-error "writing new command line parameters failed"
+    }
+    vm-command "update-grub" || {
+        command-error "updating grub failed"
+    }
+}
+
+vm-reboot() { # script API
+    # Usage: vm-reboot
+    #
+    # Reboots the virtual machine and waits that the ssh server starts
+    # responding again.
+    vm-command "reboot"
+    sleep 5
+}
+
 # Defaults to use in case the test case does not define these values.
 yaml_in_defaults="CPU=1 MEM=100M ISO=true CPUREQ=1 CPULIM=2 MEMREQ=100M MEMLIM=200M CONTCOUNT=1"
 
