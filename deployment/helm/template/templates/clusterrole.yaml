@@ -12,6 +12,7 @@ rules:
   verbs:
   - get
   - watch
+  - list
 - apiGroups:
   - topology.node.k8s.io
   resources:
