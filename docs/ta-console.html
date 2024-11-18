@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topology-Aware Metrics</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #2C3E50; /* Dark blue-grey */
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin: 0;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #34495E; /* Medium dark grey */
+            border-bottom: 3px solid #1ABC9C; /* Bright teal */
+            padding-bottom: 5px;
+            display: inline-block;
+            margin: 20px 0 15px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: #555;
+            margin-bottom: 10px;
+            padding-left: 5px;
+            border-left: 4px solid #1ABC9C; /* Bright teal */
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .metrics-group {
+            margin-bottom: 40px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #1ABC9C; /* Bright teal */
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #f4f6f9; /* Light grey for odd rows */
+        }
+
+        tr:hover {
+            background-color: #ecf0f1; /* Light grey on hover */
+            cursor: pointer;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #777;
+            background-color: #f4f6f9;
+        }
+
+        .highlight {
+            background-color: #FFEB3B; /* Highlighted rows with yellow */
+        }
+
+        @media (max-width: 768px) {
+            table, th, td {
+                font-size: 0.9rem;
+            }
+
+            h2, h3 {
+                font-size: 1.5rem;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Topology-Aware Metrics Dashboard</h1>
+    </header>
+    <div class="container">
+        <!-- CPU Metrics -->
+        <div class="metrics-group">
+            <h2>CPU Metrics</h2>
+
+            <h3>CPU Capacity</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Zone</th>
+                        <th>CPUs</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range query "nri_policy_topologyaware_policy_zone_cpu_capacity" }}
+                    <tr onclick="window.location.href='http://localhost:9090/graph?g0.expr={{ "nri_policy_topologyaware_policy_zone_cpu_capacity" | urlquery }}&g0.tab=0';">
+                        <td>{{ .Labels.zone }}</td>
+                        <td>{{ .Labels.cpus }}</td>
+                        <td>{{ .Value }}</td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+
+            <h3>CPU Shared Capacity</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Zone</th>
+                        <th>CPUs</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range query "nri_policy_topologyaware_policy_zone_cpu_shared_capacity" }}
+                    <tr class="highlight" onclick="window.location.href='http://localhost:9090/graph?g0.expr={{ "nri_policy_topologyaware_policy_zone_cpu_shared_capacity" | urlquery }}&g0.tab=0';">
+                        <td>{{ .Labels.zone }}</td>
+                        <td>{{ .Labels.cpus }}</td>
+                        <td>{{ .Value }}</td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+
+            <h3>CPU Shared Assigned</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Zone</th>
+                        <th>CPUs</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range query "nri_policy_topologyaware_policy_zone_cpu_shared_assigned" }}
+                    <tr onclick="window.location.href='http://localhost:9090/graph?g0.expr={{ "nri_policy_topologyaware_policy_zone_cpu_shared_assigned" | urlquery }}&g0.tab=0';">
+                        <td>{{ .Labels.zone }}</td>
+                        <td>{{ .Labels.cpus }}</td>
+                        <td>{{ .Value }}</td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+
+            <h3>CPU Shared Available</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Zone</th>
+                        <th>CPUs</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range query "nri_policy_topologyaware_policy_zone_cpu_shared_available" }}
+                    <tr onclick="window.location.href='http://localhost:9090/graph?g0.expr={{ "nri_policy_topologyaware_policy_zone_cpu_shared_available" | urlquery }}&g0.tab=0';">
+                        <td>{{ .Labels.zone }}</td>
+                        <td>{{ .Labels.cpus }}</td>
+                        <td>{{ .Value }}</td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Memory Metrics -->
+        <div class="metrics-group">
+            <h2>Memory Metrics</h2>
+
+            <h3>Memory Capacity</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Zone</th>
+                        <th>Memory</th>
+                        <th>Value (GB)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range query "nri_policy_topologyaware_zone_mem_capacity" }}
+                    <tr onclick="window.location.href='http://localhost:9090/graph?g0.expr={{ "nri_policy_topologyaware_zone_mem_capacity" | urlquery }}&g0.tab=0';">
+                        <td>{{ .Labels.zone }}</td>
+                        <td>{{ .Labels.mems }}</td>
+                        <td>{{ humanize1024 .Value }}</td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+
+            <h3>Memory Assigned</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Zone</th>
+                        <th>Memory</th>
+                        <th>Value (GB)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range query "nri_policy_topologyaware_zone_mem_assigned" }}
+                    <tr class="highlight" onclick="window.location.href='http://localhost:9090/graph?g0.expr={{ "nri_policy_topologyaware_zone_mem_assigned" | urlquery }}&g0.tab=0';">
+                        <td>{{ .Labels.zone }}</td>
+                        <td>{{ .Labels.mems }}</td>
+                        <td>{{ humanize1024 .Value }}</td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+
+            <h3>Memory Available</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Zone</th>
+                        <th>Memory</th>
+                        <th>Value (GB)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range query "nri_policy_topologyaware_zone_mem_available" }}
+                    <tr onclick="window.location.href='http://localhost:9090/graph?g0.expr={{ "nri_policy_topologyaware_zone_mem_available" | urlquery }}&g0.tab=0';">
+                        <td>{{ .Labels.zone }}</td>
+                        <td>{{ .Labels.mems }}</td>
+                        <td>{{ humanize1024 .Value }}</td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Container Metrics -->
+        <div class="metrics-group">
+            <h2>Container Metrics</h2>
+
+            <h3>Container Count</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Zone</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range query "nri_policy_topologyaware_zone_container_count" }}
+                    <tr onclick="window.location.href='http://localhost:9090/graph?g0.expr={{ "nri_policy_topologyaware_zone_container_count" | urlquery }}&g0.tab=0';">
+                        <td>{{ .Labels.zone }}</td>
+                        <td>{{ .Value }}</td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+
+            <h3>Shared Container Count</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Zone</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range query "nri_policy_topologyaware_zone_shared_container_count" }}
+                    <tr onclick="window.location.href='http://localhost:9090/graph?g0.expr={{ "nri_policy_topologyaware_zone_shared_container_count" | urlquery }}&g0.tab=0';">
+                        <td>{{ .Labels.zone }}</td>
+                        <td>{{ .Value }}</td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; Copyright The NRI Plugins Authors. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
