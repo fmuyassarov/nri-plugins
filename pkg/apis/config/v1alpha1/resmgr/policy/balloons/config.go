@@ -39,7 +39,7 @@ const (
 	AmountCPUSet   = policy.AmountCPUSet
 )
 
-// +k8s:deepcopy-gen=true
+// +kubebuilder:object:generate=true
 type Config struct {
 	// PinCPU controls pinning containers to CPUs.
 	// +kubebuilder:default=true
@@ -124,7 +124,7 @@ func (l CPUTopologyLevel) Value() int {
 }
 
 // BalloonDef contains a balloon definition.
-// +k8s:deepcopy-gen=true
+// +kubebuilder:object:generate=true
 type BalloonDef struct {
 	// Name of the balloon definition.
 	Name string `json:"name"`
@@ -265,7 +265,7 @@ func (p CPUPriority) Value() cpuallocator.CPUPriority {
 }
 
 // ContainerMatchConfig contains container matching configurations.
-// +k8s:deepcopy-gen=true
+// +kubebuilder:object:generate=true
 type ContainerMatchConfig struct {
 	// MatchExpressions specifies one or more expressions.
 	MatchExpressions []resmgr.Expression `json:"matchExpressions,omitempty"`
