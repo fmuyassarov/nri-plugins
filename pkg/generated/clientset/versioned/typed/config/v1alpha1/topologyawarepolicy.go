@@ -17,9 +17,9 @@
 package v1alpha1
 
 import (
-	"context"
+	context "context"
 
-	v1alpha1 "github.com/containers/nri-plugins/pkg/apis/config/v1alpha1"
+	configv1alpha1 "github.com/containers/nri-plugins/pkg/apis/config/v1alpha1"
 	scheme "github.com/containers/nri-plugins/pkg/generated/clientset/versioned/scheme"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
@@ -35,33 +35,34 @@ type TopologyAwarePoliciesGetter interface {
 
 // TopologyAwarePolicyInterface has methods to work with TopologyAwarePolicy resources.
 type TopologyAwarePolicyInterface interface {
-	Create(ctx context.Context, topologyAwarePolicy *v1alpha1.TopologyAwarePolicy, opts v1.CreateOptions) (*v1alpha1.TopologyAwarePolicy, error)
-	Update(ctx context.Context, topologyAwarePolicy *v1alpha1.TopologyAwarePolicy, opts v1.UpdateOptions) (*v1alpha1.TopologyAwarePolicy, error)
+	Create(ctx context.Context, topologyAwarePolicy *configv1alpha1.TopologyAwarePolicy, opts v1.CreateOptions) (*configv1alpha1.TopologyAwarePolicy, error)
+	Update(ctx context.Context, topologyAwarePolicy *configv1alpha1.TopologyAwarePolicy, opts v1.UpdateOptions) (*configv1alpha1.TopologyAwarePolicy, error)
 	// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-	UpdateStatus(ctx context.Context, topologyAwarePolicy *v1alpha1.TopologyAwarePolicy, opts v1.UpdateOptions) (*v1alpha1.TopologyAwarePolicy, error)
+	UpdateStatus(ctx context.Context, topologyAwarePolicy *configv1alpha1.TopologyAwarePolicy, opts v1.UpdateOptions) (*configv1alpha1.TopologyAwarePolicy, error)
 	Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
 	DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
-	Get(ctx context.Context, name string, opts v1.GetOptions) (*v1alpha1.TopologyAwarePolicy, error)
-	List(ctx context.Context, opts v1.ListOptions) (*v1alpha1.TopologyAwarePolicyList, error)
+	Get(ctx context.Context, name string, opts v1.GetOptions) (*configv1alpha1.TopologyAwarePolicy, error)
+	List(ctx context.Context, opts v1.ListOptions) (*configv1alpha1.TopologyAwarePolicyList, error)
 	Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
-	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.TopologyAwarePolicy, err error)
+	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *configv1alpha1.TopologyAwarePolicy, err error)
 	TopologyAwarePolicyExpansion
 }
 
 // topologyAwarePolicies implements TopologyAwarePolicyInterface
 type topologyAwarePolicies struct {
-	*gentype.ClientWithList[*v1alpha1.TopologyAwarePolicy, *v1alpha1.TopologyAwarePolicyList]
+	*gentype.ClientWithList[*configv1alpha1.TopologyAwarePolicy, *configv1alpha1.TopologyAwarePolicyList]
 }
 
 // newTopologyAwarePolicies returns a TopologyAwarePolicies
 func newTopologyAwarePolicies(c *ConfigV1alpha1Client, namespace string) *topologyAwarePolicies {
 	return &topologyAwarePolicies{
-		gentype.NewClientWithList[*v1alpha1.TopologyAwarePolicy, *v1alpha1.TopologyAwarePolicyList](
+		gentype.NewClientWithList[*configv1alpha1.TopologyAwarePolicy, *configv1alpha1.TopologyAwarePolicyList](
 			"topologyawarepolicies",
 			c.RESTClient(),
 			scheme.ParameterCodec,
 			namespace,
-			func() *v1alpha1.TopologyAwarePolicy { return &v1alpha1.TopologyAwarePolicy{} },
-			func() *v1alpha1.TopologyAwarePolicyList { return &v1alpha1.TopologyAwarePolicyList{} }),
+			func() *configv1alpha1.TopologyAwarePolicy { return &configv1alpha1.TopologyAwarePolicy{} },
+			func() *configv1alpha1.TopologyAwarePolicyList { return &configv1alpha1.TopologyAwarePolicyList{} },
+		),
 	}
 }

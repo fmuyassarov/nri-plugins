@@ -17,9 +17,9 @@
 package v1alpha1
 
 import (
-	"context"
+	context "context"
 
-	v1alpha1 "github.com/containers/nri-plugins/pkg/apis/config/v1alpha1"
+	configv1alpha1 "github.com/containers/nri-plugins/pkg/apis/config/v1alpha1"
 	scheme "github.com/containers/nri-plugins/pkg/generated/clientset/versioned/scheme"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
@@ -35,33 +35,34 @@ type TemplatePoliciesGetter interface {
 
 // TemplatePolicyInterface has methods to work with TemplatePolicy resources.
 type TemplatePolicyInterface interface {
-	Create(ctx context.Context, templatePolicy *v1alpha1.TemplatePolicy, opts v1.CreateOptions) (*v1alpha1.TemplatePolicy, error)
-	Update(ctx context.Context, templatePolicy *v1alpha1.TemplatePolicy, opts v1.UpdateOptions) (*v1alpha1.TemplatePolicy, error)
+	Create(ctx context.Context, templatePolicy *configv1alpha1.TemplatePolicy, opts v1.CreateOptions) (*configv1alpha1.TemplatePolicy, error)
+	Update(ctx context.Context, templatePolicy *configv1alpha1.TemplatePolicy, opts v1.UpdateOptions) (*configv1alpha1.TemplatePolicy, error)
 	// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-	UpdateStatus(ctx context.Context, templatePolicy *v1alpha1.TemplatePolicy, opts v1.UpdateOptions) (*v1alpha1.TemplatePolicy, error)
+	UpdateStatus(ctx context.Context, templatePolicy *configv1alpha1.TemplatePolicy, opts v1.UpdateOptions) (*configv1alpha1.TemplatePolicy, error)
 	Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
 	DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
-	Get(ctx context.Context, name string, opts v1.GetOptions) (*v1alpha1.TemplatePolicy, error)
-	List(ctx context.Context, opts v1.ListOptions) (*v1alpha1.TemplatePolicyList, error)
+	Get(ctx context.Context, name string, opts v1.GetOptions) (*configv1alpha1.TemplatePolicy, error)
+	List(ctx context.Context, opts v1.ListOptions) (*configv1alpha1.TemplatePolicyList, error)
 	Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
-	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.TemplatePolicy, err error)
+	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *configv1alpha1.TemplatePolicy, err error)
 	TemplatePolicyExpansion
 }
 
 // templatePolicies implements TemplatePolicyInterface
 type templatePolicies struct {
-	*gentype.ClientWithList[*v1alpha1.TemplatePolicy, *v1alpha1.TemplatePolicyList]
+	*gentype.ClientWithList[*configv1alpha1.TemplatePolicy, *configv1alpha1.TemplatePolicyList]
 }
 
 // newTemplatePolicies returns a TemplatePolicies
 func newTemplatePolicies(c *ConfigV1alpha1Client, namespace string) *templatePolicies {
 	return &templatePolicies{
-		gentype.NewClientWithList[*v1alpha1.TemplatePolicy, *v1alpha1.TemplatePolicyList](
+		gentype.NewClientWithList[*configv1alpha1.TemplatePolicy, *configv1alpha1.TemplatePolicyList](
 			"templatepolicies",
 			c.RESTClient(),
 			scheme.ParameterCodec,
 			namespace,
-			func() *v1alpha1.TemplatePolicy { return &v1alpha1.TemplatePolicy{} },
-			func() *v1alpha1.TemplatePolicyList { return &v1alpha1.TemplatePolicyList{} }),
+			func() *configv1alpha1.TemplatePolicy { return &configv1alpha1.TemplatePolicy{} },
+			func() *configv1alpha1.TemplatePolicyList { return &configv1alpha1.TemplatePolicyList{} },
+		),
 	}
 }

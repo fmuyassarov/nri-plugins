@@ -27,15 +27,15 @@ type FakeConfigV1alpha1 struct {
 }
 
 func (c *FakeConfigV1alpha1) BalloonsPolicies(namespace string) v1alpha1.BalloonsPolicyInterface {
-	return &FakeBalloonsPolicies{c, namespace}
+	return newFakeBalloonsPolicies(c, namespace)
 }
 
 func (c *FakeConfigV1alpha1) TemplatePolicies(namespace string) v1alpha1.TemplatePolicyInterface {
-	return &FakeTemplatePolicies{c, namespace}
+	return newFakeTemplatePolicies(c, namespace)
 }
 
 func (c *FakeConfigV1alpha1) TopologyAwarePolicies(namespace string) v1alpha1.TopologyAwarePolicyInterface {
-	return &FakeTopologyAwarePolicies{c, namespace}
+	return newFakeTopologyAwarePolicies(c, namespace)
 }
 
 // RESTClient returns a RESTClient that is used to communicate

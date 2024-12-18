@@ -17,129 +17,34 @@
 package fake
 
 import (
-	"context"
-
 	v1alpha1 "github.com/containers/nri-plugins/pkg/apis/config/v1alpha1"
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	labels "k8s.io/apimachinery/pkg/labels"
-	types "k8s.io/apimachinery/pkg/types"
-	watch "k8s.io/apimachinery/pkg/watch"
-	testing "k8s.io/client-go/testing"
+	configv1alpha1 "github.com/containers/nri-plugins/pkg/generated/clientset/versioned/typed/config/v1alpha1"
+	gentype "k8s.io/client-go/gentype"
 )
 
-// FakeTemplatePolicies implements TemplatePolicyInterface
-type FakeTemplatePolicies struct {
+// fakeTemplatePolicies implements TemplatePolicyInterface
+type fakeTemplatePolicies struct {
+	*gentype.FakeClientWithList[*v1alpha1.TemplatePolicy, *v1alpha1.TemplatePolicyList]
 	Fake *FakeConfigV1alpha1
-	ns   string
 }
 
-var templatepoliciesResource = v1alpha1.SchemeGroupVersion.WithResource("templatepolicies")
-
-var templatepoliciesKind = v1alpha1.SchemeGroupVersion.WithKind("TemplatePolicy")
-
-// Get takes name of the templatePolicy, and returns the corresponding templatePolicy object, and an error if there is any.
-func (c *FakeTemplatePolicies) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.TemplatePolicy, err error) {
-	emptyResult := &v1alpha1.TemplatePolicy{}
-	obj, err := c.Fake.
-		Invokes(testing.NewGetActionWithOptions(templatepoliciesResource, c.ns, name, options), emptyResult)
-
-	if obj == nil {
-		return emptyResult, err
+func newFakeTemplatePolicies(fake *FakeConfigV1alpha1, namespace string) configv1alpha1.TemplatePolicyInterface {
+	return &fakeTemplatePolicies{
+		gentype.NewFakeClientWithList[*v1alpha1.TemplatePolicy, *v1alpha1.TemplatePolicyList](
+			fake.Fake,
+			namespace,
+			v1alpha1.SchemeGroupVersion.WithResource("templatepolicies"),
+			v1alpha1.SchemeGroupVersion.WithKind("TemplatePolicy"),
+			func() *v1alpha1.TemplatePolicy { return &v1alpha1.TemplatePolicy{} },
+			func() *v1alpha1.TemplatePolicyList { return &v1alpha1.TemplatePolicyList{} },
+			func(dst, src *v1alpha1.TemplatePolicyList) { dst.ListMeta = src.ListMeta },
+			func(list *v1alpha1.TemplatePolicyList) []*v1alpha1.TemplatePolicy {
+				return gentype.ToPointerSlice(list.Items)
+			},
+			func(list *v1alpha1.TemplatePolicyList, items []*v1alpha1.TemplatePolicy) {
+				list.Items = gentype.FromPointerSlice(items)
+			},
+		),
+		fake,
 	}
-	return obj.(*v1alpha1.TemplatePolicy), err
-}
-
-// List takes label and field selectors, and returns the list of TemplatePolicies that match those selectors.
-func (c *FakeTemplatePolicies) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.TemplatePolicyList, err error) {
-	emptyResult := &v1alpha1.TemplatePolicyList{}
-	obj, err := c.Fake.
-		Invokes(testing.NewListActionWithOptions(templatepoliciesResource, templatepoliciesKind, c.ns, opts), emptyResult)
-
-	if obj == nil {
-		return emptyResult, err
-	}
-
-	label, _, _ := testing.ExtractFromListOptions(opts)
-	if label == nil {
-		label = labels.Everything()
-	}
-	list := &v1alpha1.TemplatePolicyList{ListMeta: obj.(*v1alpha1.TemplatePolicyList).ListMeta}
-	for _, item := range obj.(*v1alpha1.TemplatePolicyList).Items {
-		if label.Matches(labels.Set(item.Labels)) {
-			list.Items = append(list.Items, item)
-		}
-	}
-	return list, err
-}
-
-// Watch returns a watch.Interface that watches the requested templatePolicies.
-func (c *FakeTemplatePolicies) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
-	return c.Fake.
-		InvokesWatch(testing.NewWatchActionWithOptions(templatepoliciesResource, c.ns, opts))
-
-}
-
-// Create takes the representation of a templatePolicy and creates it.  Returns the server's representation of the templatePolicy, and an error, if there is any.
-func (c *FakeTemplatePolicies) Create(ctx context.Context, templatePolicy *v1alpha1.TemplatePolicy, opts v1.CreateOptions) (result *v1alpha1.TemplatePolicy, err error) {
-	emptyResult := &v1alpha1.TemplatePolicy{}
-	obj, err := c.Fake.
-		Invokes(testing.NewCreateActionWithOptions(templatepoliciesResource, c.ns, templatePolicy, opts), emptyResult)
-
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1alpha1.TemplatePolicy), err
-}
-
-// Update takes the representation of a templatePolicy and updates it. Returns the server's representation of the templatePolicy, and an error, if there is any.
-func (c *FakeTemplatePolicies) Update(ctx context.Context, templatePolicy *v1alpha1.TemplatePolicy, opts v1.UpdateOptions) (result *v1alpha1.TemplatePolicy, err error) {
-	emptyResult := &v1alpha1.TemplatePolicy{}
-	obj, err := c.Fake.
-		Invokes(testing.NewUpdateActionWithOptions(templatepoliciesResource, c.ns, templatePolicy, opts), emptyResult)
-
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1alpha1.TemplatePolicy), err
-}
-
-// UpdateStatus was generated because the type contains a Status member.
-// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeTemplatePolicies) UpdateStatus(ctx context.Context, templatePolicy *v1alpha1.TemplatePolicy, opts v1.UpdateOptions) (result *v1alpha1.TemplatePolicy, err error) {
-	emptyResult := &v1alpha1.TemplatePolicy{}
-	obj, err := c.Fake.
-		Invokes(testing.NewUpdateSubresourceActionWithOptions(templatepoliciesResource, "status", c.ns, templatePolicy, opts), emptyResult)
-
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1alpha1.TemplatePolicy), err
-}
-
-// Delete takes name of the templatePolicy and deletes it. Returns an error if one occurs.
-func (c *FakeTemplatePolicies) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
-	_, err := c.Fake.
-		Invokes(testing.NewDeleteActionWithOptions(templatepoliciesResource, c.ns, name, opts), &v1alpha1.TemplatePolicy{})
-
-	return err
-}
-
-// DeleteCollection deletes a collection of objects.
-func (c *FakeTemplatePolicies) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
-	action := testing.NewDeleteCollectionActionWithOptions(templatepoliciesResource, c.ns, opts, listOpts)
-
-	_, err := c.Fake.Invokes(action, &v1alpha1.TemplatePolicyList{})
-	return err
-}
-
-// Patch applies the patch and returns the patched templatePolicy.
-func (c *FakeTemplatePolicies) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.TemplatePolicy, err error) {
-	emptyResult := &v1alpha1.TemplatePolicy{}
-	obj, err := c.Fake.
-		Invokes(testing.NewPatchSubresourceActionWithOptions(templatepoliciesResource, c.ns, name, pt, data, opts, subresources...), emptyResult)
-
-	if obj == nil {
-		return emptyResult, err
-	}
-	return obj.(*v1alpha1.TemplatePolicy), err
 }

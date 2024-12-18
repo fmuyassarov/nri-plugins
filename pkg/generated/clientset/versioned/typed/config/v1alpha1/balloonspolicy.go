@@ -17,9 +17,9 @@
 package v1alpha1
 
 import (
-	"context"
+	context "context"
 
-	v1alpha1 "github.com/containers/nri-plugins/pkg/apis/config/v1alpha1"
+	configv1alpha1 "github.com/containers/nri-plugins/pkg/apis/config/v1alpha1"
 	scheme "github.com/containers/nri-plugins/pkg/generated/clientset/versioned/scheme"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
@@ -35,33 +35,34 @@ type BalloonsPoliciesGetter interface {
 
 // BalloonsPolicyInterface has methods to work with BalloonsPolicy resources.
 type BalloonsPolicyInterface interface {
-	Create(ctx context.Context, balloonsPolicy *v1alpha1.BalloonsPolicy, opts v1.CreateOptions) (*v1alpha1.BalloonsPolicy, error)
-	Update(ctx context.Context, balloonsPolicy *v1alpha1.BalloonsPolicy, opts v1.UpdateOptions) (*v1alpha1.BalloonsPolicy, error)
+	Create(ctx context.Context, balloonsPolicy *configv1alpha1.BalloonsPolicy, opts v1.CreateOptions) (*configv1alpha1.BalloonsPolicy, error)
+	Update(ctx context.Context, balloonsPolicy *configv1alpha1.BalloonsPolicy, opts v1.UpdateOptions) (*configv1alpha1.BalloonsPolicy, error)
 	// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-	UpdateStatus(ctx context.Context, balloonsPolicy *v1alpha1.BalloonsPolicy, opts v1.UpdateOptions) (*v1alpha1.BalloonsPolicy, error)
+	UpdateStatus(ctx context.Context, balloonsPolicy *configv1alpha1.BalloonsPolicy, opts v1.UpdateOptions) (*configv1alpha1.BalloonsPolicy, error)
 	Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
 	DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
-	Get(ctx context.Context, name string, opts v1.GetOptions) (*v1alpha1.BalloonsPolicy, error)
-	List(ctx context.Context, opts v1.ListOptions) (*v1alpha1.BalloonsPolicyList, error)
+	Get(ctx context.Context, name string, opts v1.GetOptions) (*configv1alpha1.BalloonsPolicy, error)
+	List(ctx context.Context, opts v1.ListOptions) (*configv1alpha1.BalloonsPolicyList, error)
 	Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
-	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.BalloonsPolicy, err error)
+	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *configv1alpha1.BalloonsPolicy, err error)
 	BalloonsPolicyExpansion
 }
 
 // balloonsPolicies implements BalloonsPolicyInterface
 type balloonsPolicies struct {
-	*gentype.ClientWithList[*v1alpha1.BalloonsPolicy, *v1alpha1.BalloonsPolicyList]
+	*gentype.ClientWithList[*configv1alpha1.BalloonsPolicy, *configv1alpha1.BalloonsPolicyList]
 }
 
 // newBalloonsPolicies returns a BalloonsPolicies
 func newBalloonsPolicies(c *ConfigV1alpha1Client, namespace string) *balloonsPolicies {
 	return &balloonsPolicies{
-		gentype.NewClientWithList[*v1alpha1.BalloonsPolicy, *v1alpha1.BalloonsPolicyList](
+		gentype.NewClientWithList[*configv1alpha1.BalloonsPolicy, *configv1alpha1.BalloonsPolicyList](
 			"balloonspolicies",
 			c.RESTClient(),
 			scheme.ParameterCodec,
 			namespace,
-			func() *v1alpha1.BalloonsPolicy { return &v1alpha1.BalloonsPolicy{} },
-			func() *v1alpha1.BalloonsPolicyList { return &v1alpha1.BalloonsPolicyList{} }),
+			func() *configv1alpha1.BalloonsPolicy { return &configv1alpha1.BalloonsPolicy{} },
+			func() *configv1alpha1.BalloonsPolicyList { return &configv1alpha1.BalloonsPolicyList{} },
+		),
 	}
 }

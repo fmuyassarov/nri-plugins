@@ -17,8 +17,8 @@
 package versioned
 
 import (
-	"fmt"
-	"net/http"
+	fmt "fmt"
+	http "net/http"
 
 	configv1alpha1 "github.com/containers/nri-plugins/pkg/generated/clientset/versioned/typed/config/v1alpha1"
 	discovery "k8s.io/client-go/discovery"
