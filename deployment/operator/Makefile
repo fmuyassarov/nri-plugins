@@ -94,7 +94,7 @@ endif
 
 .PHONY: bundle
 bundle: copy-crds kustomize operator-sdk kustomizations ## Generate bundle manifests and metadata, then validate generated files.
-	$(OPERATOR_SDK) generate kustomize manifests -q
+	# $(OPERATOR_SDK) generate kustomize manifests -q
 	cd config/manager && $(KUSTOMIZE) edit set image controller=$(IMAGE)
 	find config/manifests/bases -name nri-plugins-operator.clusterserviceversion.yaml | xargs -I '{}' \
 		sed -e "s|containerImage:.*|containerImage: $(IMAGE)|" -i '{}';
