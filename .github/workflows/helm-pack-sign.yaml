@@ -1,0 +1,54 @@
+name: sign helm packages
+on:
+  push:
+    branches: main
+
+jobs:
+  import-gpg:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Import GPG key0
+        uses: crazy-max/ghaction-import-gpg@v6
+        id: import-gpg
+        with:
+          gpg_private_key: ${{ secrets.BOT_GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.BOT_PASSPHRASE }}
+
+      - name: List keys
+        run: gpg -K
+
+      - name: Export GPG private key
+        run: |
+          gpg --batch \
+              --yes \
+              --pinentry-mode loopback \
+              --passphrase ${{ secrets.BOT_PASSPHRASE }} \
+              --export-secret-keys ${{ secrets.BOT_GPG_SUBKEY_ID }} \
+              > ~/.gnupg/secring.gpg
+
+      - name: Verify GPG secret key file is created
+        run: |
+          if [ ! -f ~/.gnupg/secring.gpg ]; then
+            echo "Error: GPG secret key file '~/.gnupg/secring.gpg' not found!" >&2
+            exit 1
+          fi
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4.0.0
+
+      - name: Package Helm Chart
+        run: |
+          cd deployment/helm
+          echo ${{ secrets.BOT_PASSPHRASE }} | helm package --sign --key ${{ steps.import-gpg.outputs.email }} ./balloons/ --keyring ~/.gnupg/secring.gpg --passphrase-file "-"
+          ls -lah .
+
+      - name: list the keys once again
+        run: |
+          gpg --list-secret-keys --keyid-format=long
+
+      - name: print out the provenance file
+        run: |
+          cat  /home/runner/work/nri-plugins/nri-plugins/deployment/helm/nri-resource-policy-balloons-v0.0.0.tgz.prov
