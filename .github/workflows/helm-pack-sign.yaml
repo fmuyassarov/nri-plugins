@@ -1,0 +1,56 @@
+name: sign helm packages
+on:
+  push:
+    branches: main
+
+jobs:
+  import-gpg:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Import GPG key0
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.BOT_GPG_PRIVATE_KEY_0 }}
+          passphrase: ${{ secrets.BOT_PASSPHRASE_0 }}
+
+      - name: Import GPG key1
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.BOT_GPG_PRIVATE_KEY_1 }}
+          passphrase: ${{ secrets.BOT_PASSPHRASE_1 }}
+
+      - name: List keys
+        run: gpg -K
+
+      - name: Export GPG private key
+        run: |
+          gpg --batch \
+              --yes \
+              --pinentry-mode loopback \
+              --passphrase ${{ secrets.BOT_PASSPHRASE_0 }} \
+              --export-secret-keys ${{ secrets.BOT_GPG_ID_0 }} \
+              > ~/.gnupg/secring.gpg
+
+      - name: Verify GPG secret key file is created
+        run: |
+          if [ ! -f ~/.gnupg/secring.gpg1 ]; then
+            echo "Error: GPG secret key file '~/.gnupg/secring.gpg' not found!" >&2
+            exit 1
+          fi
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4.0.0
+
+      - name: Package Helm Chart
+        run: |
+          cd deployment/helm
+          echo ${{ secrets.BOT_PASSPHRASE }} | helm package \
+            ./balloons/ 
+            --sign \
+            --key ${{ secrets.BOT_GPG_ID_0 }} \
+            --keyring ~/.gnupg/secring.gpg \
+            --passphrase-file "-"
+          ls -lah .
